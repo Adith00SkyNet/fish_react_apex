@@ -17,6 +17,7 @@ export function OrderTracking({ order, onClose }: Props) {
   const mapRef = useRef<HTMLDivElement>(null)
   const map = useRef<L.Map | null>(null)
   const markers = useRef<L.LayerGroup | null>(null)
+  const route = useRef<L.Polyline | null>(null)
 
   const refresh = async () => {
     try { setError(''); const response = await orderApi.getOrderTracking(order.order_id); setTracking(response.data) }
@@ -43,10 +44,12 @@ export function OrderTracking({ order, onClose }: Props) {
   useEffect(() => {
     if (!map.current || !markers.current || !tracking) return
     markers.current.clearLayers()
+    route.current?.remove()
+    route.current = null
     const points: L.LatLngExpression[] = []
-    if (hasPoint(tracking.customer_location)) { const point: L.LatLngExpression = [tracking.customer_location.latitude, tracking.customer_location.longitude]; points.push(point); L.marker(point, { title: 'Customer location' }).addTo(markers.current).bindPopup('Customer') }
+    if (hasPoint(tracking.customer_location)) { const point: L.LatLngExpression = [tracking.customer_location.latitude, tracking.customer_location.longitude]; points.push(point); L.circleMarker(point, { radius: 8, color: '#c62828', fillColor: '#e53935', fillOpacity: 1, weight: 2 }).addTo(markers.current).bindPopup('Customer destination') }
     if (hasPoint(tracking.delivery_location)) { const point: L.LatLngExpression = [tracking.delivery_location.latitude, tracking.delivery_location.longitude]; points.push(point); L.marker(point, { title: 'Delivery partner' }).addTo(markers.current).bindPopup('Delivery partner') }
-    if (points.length === 2) map.current.fitBounds(L.latLngBounds(points), { padding: [35, 35] })
+    if (points.length === 2) { route.current = L.polyline(points, { color: '#1677ff', weight: 5, opacity: 0.85 }).addTo(map.current); map.current.fitBounds(L.latLngBounds(points), { padding: [35, 35] }) }
     else if (points.length === 1) map.current.setView(points[0], 15)
   }, [tracking])
 
