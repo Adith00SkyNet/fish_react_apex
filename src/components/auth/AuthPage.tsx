@@ -28,13 +28,13 @@ export function AuthPage() {
 
   return <main className="auth-shell">
     <section className="auth-story">
-      <div className="auth-brand"><img className="app-logo" src="/logo.jpeg" alt="DELFISH" /></div>
+      <div className="auth-brand"><img className="app-logo" src="/logo.jpeg" alt="& SEA FISH" /></div>
       <div className="story-copy"><span className="eyebrow auth-eyebrow">ALAPPUZHA · FRESH FROM THE COAST</span><h1>Good food starts with good ingredients.</h1><p>Bring the day&apos;s best seafood home, prepared just the way you like it.</p></div>
       <div className="story-footer"><span><CheckCircle2 size={15} /> Daily product updates</span><span><CheckCircle2 size={15} /> Same-day delivery</span></div>
     </section>
     <section className="auth-panel"><div className="auth-form-wrap">
-      <div className="auth-mobile-brand"><img className="app-logo" src="/logo.jpeg" alt="DELFISH" /></div>
-      <div className="auth-heading"><span className="eyebrow">WELCOME TO DELFISH</span><h2>{mode === 'login' ? 'Welcome back.' : 'Join the harbor.'}</h2><p>{mode === 'login' ? 'Sign in to manage your catch and deliveries.' : 'Create an account for fresh seafood at your door.'}</p></div>
+      <div className="auth-mobile-brand"><img className="app-logo" src="/logo.jpeg" alt="& SEA FISH" /></div>
+      <div className="auth-heading"><span className="eyebrow">WELCOME TO & SEA FISH</span><h2>{mode === 'login' ? 'Welcome back.' : 'Join the harbor.'}</h2><p>{mode === 'login' ? 'Sign in to manage your catch and deliveries.' : 'Create an account for fresh seafood at your door.'}</p></div>
       <div className="auth-tabs"><button type="button" className={mode === 'login' ? 'active' : ''} onClick={() => switchMode('login')}>Sign in</button><button type="button" className={mode === 'register' ? 'active' : ''} onClick={() => switchMode('register')}>Create account</button></div>
       <form className="auth-form" onSubmit={submit}>
         {mode === 'register' && <label><span>Full name</span><div className="input-wrap"><UserRound size={17} /><input required value={form.name} onChange={(event) => updateField('name', event.target.value)} placeholder="Your name" /></div></label>}
@@ -46,7 +46,7 @@ export function AuthPage() {
         {authError && <p className="auth-error">{authError}</p>}
         <button type="submit" className="auth-submit" disabled={submitting}>{submitting ? 'Connecting...' : mode === 'login' ? 'Sign in to workspace' : 'Create my account'} <ArrowRight size={17} /></button>
       </form>
-      <p className="auth-switch">{mode === 'login' ? 'New to DELFISH?' : 'Already have an account?'} <button type="button" onClick={() => switchMode(mode === 'login' ? 'register' : 'login')}>{mode === 'login' ? 'Create an account' : 'Sign in'}</button></p>
+      <p className="auth-switch">{mode === 'login' ? 'New to & SEA FISH?' : 'Already have an account?'} <button type="button" onClick={() => switchMode(mode === 'login' ? 'register' : 'login')}>{mode === 'login' ? 'Create an account' : 'Sign in'}</button></p>
       <small className="auth-note">By continuing, you agree to our terms and privacy policy.</small>
     </div></section>
   </main>

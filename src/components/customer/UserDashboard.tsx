@@ -15,7 +15,7 @@ export function UserDashboard({ name, onLogout }: UserDashboardProps) {
 
   return <div className="customer-shell">
     <header className="customer-header">
-      <div className="customer-brand"><img src="/logo.jpeg" alt="DELFISH" /></div>
+      <div className="customer-brand"><img src="/logo.jpeg" alt="& SEA FISH" /></div>
       <div className="customer-actions">
         <span className="customer-greeting">Hello, <strong>{name}</strong></span>
         <button type="button" className="customer-cart" onClick={open}><ShoppingCart size={18} /><span>Basket</span>{count > 0 && <b>{count}</b>}</button>

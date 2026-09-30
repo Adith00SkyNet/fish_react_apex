@@ -6,5 +6,5 @@
 .order-history-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;font-size:12px;color:#5a6d6f}
 .order-cancel-button{margin-top:12px;border:1px solid #efc9c0;border-radius:5px;background:#fff8f6;color:#b3503f;padding:8px 11px;font-size:10px;font-weight:600}.order-cancel-button:disabled{opacity:.6;cursor:wait}
 .order-history-bottom strong{color:#215d59;font-size:15px}
-.order-track-button{margin-top:12px;border:0;border-radius:5px;background:#087fc5;color:#fff;padding:8px 11px;font-size:10px;font-weight:600}.order-track-button:hover{background:#056da9}
-.orders-pagination{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:18px;color:#82928f;font-size:11px}.orders-pagination button{border:1px solid #dce7da;border-radius:5px;background:#fff;color:#087fc5;padding:8px 12px;font-size:10px}.orders-pagination button:disabled{opacity:.45;cursor:not-allowed}
+.order-track-button{margin-top:12px;border:0;border-radius:5px;background:#10bfc9;color:#fff;padding:8px 11px;font-size:10px;font-weight:600}.order-track-button:hover{background:#0899a5}
+.orders-pagination{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:18px;color:#82928f;font-size:11px}.orders-pagination button{border:1px solid #dce7da;border-radius:5px;background:#fff;color:#10bfc9;padding:8px 12px;font-size:10px}.orders-pagination button:disabled{opacity:.45;cursor:not-allowed}

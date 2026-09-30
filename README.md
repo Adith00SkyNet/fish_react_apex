@@ -1,4 +1,4 @@
-# DELFISH
+# & SEA FISH
 
 React frontend for the fish shop, designed to sit beside Oracle APEX and ORDS. Without `VITE_ORDS_BASE_URL` set, every screen falls back to local preview data/actions so the whole app (admin, customer, delivery) can be reviewed with no backend. Once the env var is set, the same screens call ORDS instead — no code changes needed.
 

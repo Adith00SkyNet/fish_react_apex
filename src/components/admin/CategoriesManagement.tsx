@@ -41,7 +41,7 @@ export function CategoriesManagement() {
   }
 
   return <section className="category-admin">
-    <div className="panel-heading"><div><h2>Categories</h2><p>Organize the DELFISH catalog for customers.</p></div></div>
+    <div className="panel-heading"><div><h2>Categories</h2><p>Organize the & SEA FISH catalog for customers.</p></div></div>
     <form className="category-form" onSubmit={submit}>
       <input required placeholder="English name" value={form.name_en} onChange={(event) => setForm({ ...form, name_en: event.target.value })} />
       <input required placeholder="Malayalam name" value={form.name_ml} onChange={(event) => setForm({ ...form, name_ml: event.target.value })} />
