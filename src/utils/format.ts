@@ -1,0 +1,1 @@
+export const formatPrice = (value: number) => `₹${(value ?? 0).toLocaleString('en-IN')}`
