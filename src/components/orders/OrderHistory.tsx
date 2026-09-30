@@ -38,7 +38,11 @@ export function OrderHistory() {
     if (!isApiConfigured) return
     let cancelled = false
     orderApi.mine().then((orders) => {
-      if (!cancelled) setOrders(orders)
+      const enriched = orders.map((order) => {
+        if (order.delivery_latitude != null && order.delivery_longitude != null) return order
+        try { const saved = JSON.parse(localStorage.getItem(`sea_fish_order_location_${order.order_id}`) ?? 'null') as { latitude?: number; longitude?: number } | null; return saved?.latitude != null && saved.longitude != null ? { ...order, delivery_latitude: saved.latitude, delivery_longitude: saved.longitude } : order } catch { return order }
+      })
+      if (!cancelled) setOrders(enriched)
     }).catch(() => {
       if (!cancelled) setError('Could not reach ORDS — connect the API to see your order history.')
     }).finally(() => {

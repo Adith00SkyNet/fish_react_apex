@@ -65,12 +65,16 @@ export type AuthResponseDto = {
 export type OrderStatus = 'PLACED' | 'CONFIRMED' | 'OUT_FOR_DELIVERY' | 'DELIVERED' | 'CANCELLED'
 
 export type OrderTrackingDto = {
+  success: boolean
   order_id: number
+  customer_id: number
   status: OrderStatus
-  delivery_person?: { id?: number; name?: string; phone?: string } | null
-  customer_location?: { latitude?: number; longitude?: number } | null
-  delivery_location?: { latitude?: number; longitude?: number } | null
-  location_updated_at?: string | null
+  delivery_person_id: number | null
+  delivery_person_name: string | null
+  delivery_person_phone: string | null
+  customer_location: { latitude: number | null; longitude: number | null } | null
+  delivery_location: { latitude: number | null; longitude: number | null } | null
+  location_updated_at: string | null
 }
 
 export type OrderItemDto = {
@@ -91,6 +95,8 @@ export type OrderDto = {
   delivery_person_id?: number | null
   delivery_person_name?: string
   delivery_address: string
+  delivery_latitude?: number | null
+  delivery_longitude?: number | null
   delivery_slot: string | null
   total_amount: number
   payment_status: 'PENDING' | 'PAID'
@@ -104,6 +110,8 @@ export type OrderDto = {
 
 export type CreateOrderPayload = {
   delivery_address: string
+  delivery_latitude?: number | null
+  delivery_longitude?: number | null
   delivery_slot?: string
   payment_method?: 'COD'
   items: { product_id: number; qty: number; unit: string }[]
