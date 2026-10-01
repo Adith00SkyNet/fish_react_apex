@@ -11,7 +11,7 @@ type Tab = 'shop' | 'orders'
 
 export function UserDashboard({ name, onLogout }: UserDashboardProps) {
   const { count, isOpen, open, close, add } = useCart()
-  const [tab, setTab] = useState<Tab>('shop')
+  const [tab, setTab] = useState<Tab>(() => new URLSearchParams(window.location.search).get('tab') === 'orders' ? 'orders' : 'shop')
 
   return <div className="customer-shell">
     <header className="customer-header">

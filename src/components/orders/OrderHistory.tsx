@@ -64,6 +64,7 @@ export function OrderHistory() {
     </div>
     <ul>{(order.items ?? []).map((item) => <li key={item.order_item_id}>{item.product_name_en ?? `Product #${item.product_id}`} · {item.qty} {item.unit}</li>)}</ul>
     <div className="order-history-bottom"><span>{order.delivery_slot ?? 'Delivery slot pending'}</span><strong>{formatPrice(order.total_amount)}</strong></div>
+    <div className={`order-payment-status payment-${order.payment_status.toLowerCase()}`}><span>Payment</span><strong>{order.payment_status === 'PAID' ? 'Paid' : 'Pending'}</strong></div>
     {(order.status === 'PLACED' || order.status === 'CONFIRMED') && <button type="button" className="order-cancel-button" disabled={cancellingId === order.order_id} onClick={() => cancelOrder(order.order_id)}>{cancellingId === order.order_id ? 'Cancelling…' : 'Cancel order'}</button>}
     {isOutForDelivery(order.status) && <button type="button" className="order-track-button" onClick={() => setTrackingOrder(order)}>Track delivery</button>}
   </article>)}{pageCount > 1 && <nav className="orders-pagination" aria-label="Order pages"><button type="button" disabled={page === 1} onClick={() => setPage((current) => current - 1)}>Previous</button><span>Page {page} of {pageCount}</span><button type="button" disabled={page === pageCount} onClick={() => setPage((current) => current + 1)}>Next</button></nav>}{trackingOrder && <OrderTracking order={trackingOrder} onClose={() => setTrackingOrder(null)} />}</div>

@@ -15,6 +15,10 @@ import type {
 } from '../types/api'
 
 export const ORDS_BASE_URL = import.meta.env.VITE_ORDS_BASE_URL || '/ords/skynetspace/api/v1'
+// The ORDS handler must use this exact APEX page in order_meta.return_url.
+// APEX sessions are dynamic and must not be appended or hardcoded.
+export const FRONTEND_BASE_URL = 'https://oracleapex.com/ords/r/skynetspace3/7seafish/shop'
+export const CASHFREE_MODE: 'sandbox' | 'production' = import.meta.env.VITE_CASHFREE_MODE === 'production' ? 'production' : 'sandbox'
 
 // True once a real ORDS base URL has been configured. Screens use this to
 // fall back to local demo data / simulated actions so the app stays
@@ -92,6 +96,27 @@ export const orderApi = {
   cancel: (id: number) => apiClient.put<OrderDto>(`/orders/${id}/cancel`),
   getOrderTracking: (orderId: number) => apiClient.get<OrderTrackingDto>(`/orders/${orderId}/tracking`),
 }
+
+export type CashfreePaymentResponse = {
+  success: boolean
+  message: string
+  payment_id: number
+  order_id: number
+  amount: number
+  currency: string
+  gateway: 'CASHFREE'
+  gateway_order_id: string
+  payment_session_id: string
+  status: string
+}
+
+export const paymentApi = {
+  createCashfree: (orderId: number) =>
+    apiClient.post<CashfreePaymentResponse>('/payments/cashfree/create', { order_id: orderId }),
+  verifyCashfree: (orderId: number) =>
+    apiClient.get('/payments/cashfree/verify/' + orderId),
+}
+
 
 export const deliveryApi = {
   assigned: () => apiClient.get('/delivery/orders').then((response) => unwrapList<OrderDto>(response.data)),

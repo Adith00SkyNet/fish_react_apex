@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { authApi, isApiConfigured } from '../api/client'
 import type { AuthResponseDto, AuthUserDto, Role } from '../types/api'
 
-export type AuthUser = { id: number | null; name: string; role: Role; phone?: string; email?: string }
+export type AuthUser = { id: number | null; name: string; role: Role; phone?: string; email?: string; address?: string }
 type RegisterPayload = { name: string; phone: string; email: string; address: string; password: string }
 
 type AuthContextValue = {
@@ -21,6 +21,7 @@ const STORAGE_TOKEN = 'fishshop_access_token'
 const STORAGE_ROLE = 'fishshop_user_role'
 const STORAGE_NAME = 'fishshop_user_name'
 const STORAGE_ID = 'fishshop_user_id'
+const STORAGE_ADDRESS = 'fishshop_user_address'
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
@@ -32,6 +33,7 @@ function readStoredUser(): AuthUser | null {
     id: storedId ? Number(storedId) : null,
     name: localStorage.getItem(STORAGE_NAME) || 'Customer',
     role: (localStorage.getItem(STORAGE_ROLE) as Role) || 'CUSTOMER',
+    address: localStorage.getItem(STORAGE_ADDRESS) || undefined,
   }
 }
 
@@ -40,6 +42,7 @@ function persistUser(user: AuthUser, token?: string) {
   localStorage.setItem(STORAGE_ROLE, user.role)
   localStorage.setItem(STORAGE_NAME, user.name)
   if (user.id != null) localStorage.setItem(STORAGE_ID, String(user.id))
+  if (user.address) localStorage.setItem(STORAGE_ADDRESS, user.address)
 }
 
 function clearStoredUser() {
@@ -47,15 +50,16 @@ function clearStoredUser() {
   localStorage.removeItem(STORAGE_ROLE)
   localStorage.removeItem(STORAGE_NAME)
   localStorage.removeItem(STORAGE_ID)
+  localStorage.removeItem(STORAGE_ADDRESS)
 }
 
 function fromUserDto(dto: AuthUserDto): AuthUser {
-  return { id: dto.user_id, name: dto.name, role: dto.role, phone: dto.phone, email: dto.email }
+  return { id: dto.user_id, name: dto.name, role: dto.role, phone: dto.phone, email: dto.email, address: dto.address }
 }
 
 function fromAuthResponse(data: AuthResponseDto | undefined, fallbackName: string): AuthUser {
   if (data?.user) return fromUserDto(data.user)
-  return { id: null, name: fallbackName, role: 'CUSTOMER' }
+  return { id: null, name: fallbackName, role: 'CUSTOMER', address: data?.user?.address }
 }
 
 function getAccessToken(data: AuthResponseDto | undefined) {

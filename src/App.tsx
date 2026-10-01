@@ -21,7 +21,7 @@ import type { Product } from './types/product'
 import './App.css'
 import './brand.css'
 
-function App() {
+export function StoreApp() {
   const { user, logout } = useAuth()
   const { count, isOpen, open, close, add } = useCart()
   const [activeNav, setActiveNav] = useState('Overview')
@@ -66,4 +66,4 @@ function App() {
   </div>
 }
 
-export default App
+export default StoreApp

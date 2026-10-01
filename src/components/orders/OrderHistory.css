@@ -1,9 +1,10 @@
 .order-history{display:grid;gap:12px}
-.order-history-card{background:#fff;border:1px solid #e8ece9;border-radius:8px;padding:16px}
+.order-history-card{background:#fff;border:1px solid #e8ece9;border-radius:12px;padding:17px;box-shadow:0 8px 24px #1c42400b}
 .order-history-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#5a6d6f;margin-bottom:8px}
 .order-history-card ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:3px}
 .order-history-card li{font-size:12px;color:#2a4147}
 .order-history-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;font-size:12px;color:#5a6d6f}
+.order-payment-status{display:flex;justify-content:space-between;align-items:center;margin-top:11px;padding:9px 11px;border-radius:7px;background:#fff8df;color:#93702b;font-size:11px}.order-payment-status strong{font-size:10px;text-transform:uppercase;letter-spacing:.5px}.order-payment-status.payment-paid{background:#e8f7ee;color:#27805e}
 .order-cancel-button{margin-top:12px;border:1px solid #efc9c0;border-radius:5px;background:#fff8f6;color:#b3503f;padding:8px 11px;font-size:10px;font-weight:600}.order-cancel-button:disabled{opacity:.6;cursor:wait}
 .order-history-bottom strong{color:#215d59;font-size:15px}
 .order-track-button{margin-top:12px;border:0;border-radius:5px;background:#10bfc9;color:#fff;padding:8px 11px;font-size:10px;font-weight:600}.order-track-button:hover{background:#0899a5}

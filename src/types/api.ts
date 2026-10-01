@@ -105,7 +105,7 @@ export type OrderDto = {
 export type CreateOrderPayload = {
   delivery_address: string
   delivery_slot?: string
-  payment_method?: 'COD'
+  payment_method?: 'COD' | 'ONLINE'
   items: { product_id: number; qty: number; unit: string }[]
 }
 
